@@ -22,5 +22,6 @@ jobs:
         SSH_IPADDRESS: ${{ secrets.SSH_IPADDRESS }}
         SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
       run: |
-        sshpass -p "$SSH_PASSWORD" rsync -avz \
-          ./ "$SSH_USERNAME@$SSH_IPADDRESS:/home/debian/test" --exclude .git
+        sshpass -p "$SSH_PASSWORD" rsync -rv \
+          -e "ssh -o StrictHostKeyChecking=no" \
+          ./ "$SSH_USERNAME@$SSH_IPADDRESS:/home/***/test" --exclude .git
