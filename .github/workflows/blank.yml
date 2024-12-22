@@ -3,7 +3,7 @@ name: Deploy on Push
 on:
   push:
     branches:
-      - main
+      - main # Adjust to your desired branch
 
 jobs:
   deploy:
@@ -17,7 +17,10 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y sshpass
 
     - name: Deploy using rsync
+      env:
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        SSH_IPADDRESS: ${{ secrets.SSH_IPADDRESS }}
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
       run: |
-        sshpass -p "mmtq@3124" rsync -rv \
-          -e "ssh -o StrictHostKeyChecking=no" \
-          ./ "debian@192.99.168.95:/home/debian/test" --exclude .git
+        sshpass -p "$SSH_PASSWORD" rsync -avz \
+          ./ "$SSH_USERNAME@$SSH_IPADDRESS:/home/debian/test" --exclude .git
