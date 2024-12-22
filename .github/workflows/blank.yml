@@ -16,15 +16,8 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get update && sudo apt-get install -y sshpass
 
-    - name: Debug SSH IP Address
-      run: echo "SSH_IPADDRESS is $SSH_IPADDRESS"  # Debugging step
-
     - name: Deploy using rsync
-      env:
-        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-        SSH_IPADDRESS: ${{ secrets.SSH_IPADDRESS }}
-        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
       run: |
-        sshpass -p "$SSH_PASSWORD" rsync -rv \
+        sshpass -p "mmtq@3124" rsync -rv \
           -e "ssh -o StrictHostKeyChecking=no" \
-          ./ "$SSH_USERNAME@$SSH_IPADDRESS:/home/***/test" --exclude .git
+          ./ "debian@192.99.168.95:/home/debian/test" --exclude .git
