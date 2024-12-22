@@ -19,12 +19,6 @@ jobs:
     - name: Debug SSH IP Address
       run: echo "SSH_IPADDRESS is $SSH_IPADDRESS"  # Debugging step
 
-    - name: Add SSH Host Key
-      run: |
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh  # Ensure directory has proper permissions
-        ssh-keyscan -H "$SSH_IPADDRESS" >> ~/.ssh/known_hosts
-
     - name: Deploy using rsync
       env:
         SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
