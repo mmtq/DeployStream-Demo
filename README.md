@@ -1,6 +1,6 @@
 # DeployStream Demo  
 
-This repository demonstrates the usage of [DeployStream](https://github.com/Sayemahamed/DeployStream), a seamless auto-deployment solution from GitHub to VPS OS using GitHub Actions.  
+This repository demonstrates the usage of [DeployStream](https://github.com/Sayemahamed/DeployStream), a seamless auto-deployment solution from GitHub to VPS using GitHub Actions.  
 
 ## Overview  
 
